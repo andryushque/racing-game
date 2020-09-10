@@ -19,19 +19,40 @@ const keys = {
 const setting = {
   start: false,
   score: 0,
-  speed: 3,
+  speed: 2,
+  traffic: 2,
 };
+
+function getQuantityElements(heightElement) {
+  return document.documentElement.clientHeight / heightElement + 1;
+}
+
+function getRandomNum(min, max) {
+  let randomNum = min + Math.random() * (max + 1 - min);
+  return Math.floor(randomNum);
+}
 
 function startGame() {
   start.classList.add("hide");
 
-  for (let i = 0; i < 20; i++) {
+  for (let i = 0; i < getQuantityElements(100); i++) {
     const line = document.createElement("div");
     line.classList.add("line");
     line.style.top = i * 100 + "px";
     line.y = i * 100;
     gameArea.appendChild(line);
   }
+
+  for (let i = 0; i < getQuantityElements(100 * setting.traffic); i++) {
+    const enemy = document.createElement("div");
+    enemy.classList.add("enemy");
+    enemy.y = -150 * setting.traffic * (i + 1);
+    enemy.style.top = enemy.y + "px";
+    enemy.style.left =
+      getRandomNum(0, gameArea.offsetWidth - enemy.offsetWidth) + "px";
+    gameArea.appendChild(enemy);
+  }
+
   setting.start = true;
   gameArea.appendChild(car);
   setting.x = car.offsetLeft;
@@ -42,6 +63,7 @@ function startGame() {
 function playGame() {
   if (setting.start) {
     moveRoad();
+    moveEnemy();
     if (keys.ArrowLeft && setting.x > 0) {
       setting.x -= setting.speed;
     }
@@ -79,8 +101,22 @@ function moveRoad() {
     line.y += setting.speed;
     line.style.top = line.y + "px";
 
-    if (line.y > document.documentElement.clientHeight) {
+    if (line.y >= document.documentElement.clientHeight) {
       line.y = -100;
+    }
+  });
+}
+
+function moveEnemy() {
+  let enemies = document.querySelectorAll(".enemy");
+  enemies.forEach(function (enemy) {
+    enemy.y += setting.speed / 1.5;
+    enemy.style.top = enemy.y + "px";
+
+    if (enemy.y >= document.documentElement.clientHeight) {
+      enemy.y = -100 * setting.traffic;
+      enemy.style.left =
+        getRandomNum(0, gameArea.offsetWidth - enemy.offsetWidth) + "px";
     }
   });
 }
