@@ -1,4 +1,5 @@
-const score = document.querySelector(".score"),
+const score = document.querySelector(".score-now"),
+  scoreTop = document.querySelector(".score-top"),
   start = document.querySelector(".start"),
   gameArea = document.querySelector(".gameArea"),
   car = document.createElement("div");
@@ -19,6 +20,7 @@ const keys = {
 const setting = {
   start: false,
   score: 0,
+  scoreTop: 0,
   speed: 2,
   traffic: 2,
 };
@@ -67,7 +69,7 @@ function startGame() {
 function playGame() {
   if (setting.start) {
     setting.score += setting.speed;
-    score.innerHTML = "Score<br>" + setting.score;
+    score.innerHTML = setting.score;
     moveRoad();
     moveEnemy();
     if (keys.ArrowLeft && setting.x > 0) {
@@ -129,6 +131,10 @@ function moveEnemy() {
       setting.start = false;
       console.warn("Crash!");
       start.classList.remove("hide");
+      if (setting.score > setting.scoreTop) {
+        setting.scoreTop = setting.score;
+        scoreTop.textContent = setting.score;
+      }
     }
 
     enemy.y += setting.speed / 1.5;

@@ -33,11 +33,14 @@ body {
   transition: color 0.3s ease, background 0.3s ease;
 }
 
-.score {
+.score-wrapper {
   position: absolute;
-  top: 10px;
-  right: 10px;
-  margin-top: 10px;
+  top: 100px;
+  left: 10px;
+}
+
+.score {
+  margin-bottom: 10px;
   font: normal 400 16px Helvetica, sans-serif;
   text-transform: uppercase;
 }
