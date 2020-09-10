@@ -23,4 +23,13 @@ body {
   height: 100vh;
   margin: auto;
   background: #222;
+  overflow: hidden;
+}
+
+.line {
+  position: absolute;
+  left: 145px;
+  width: 10px;
+  height: 50px;
+  background: #fff;
 }
