@@ -9,3 +9,5 @@ Simple browser game.
 HTML5, CSS3, JavaScript
 
 ### Link to the game
+
+[https://andryushque.github.io/racing-game/](https://andryushque.github.io/racing-game/)
