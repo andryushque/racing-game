@@ -7,6 +7,26 @@ body {
   display: none;
 }
 
+.game {
+  position: relative;
+}
+
+.start {
+  position: absolute;
+  top: 10px;
+  left: calc(50% - 400px);
+  padding: 10px;
+  border: 1px solid #fff;
+  font: normal 400 16px Helvetica, sans-serif;
+  text-transform: uppercase;
+}
+.start:hover {
+  cursor: pointer;
+  background: #fff;
+  color: #000;
+  transition: color 0.3s ease, background 0.3s ease;
+}
+
 .car,
 .enemy {
   position: absolute;
